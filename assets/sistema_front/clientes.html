@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel SIGED - Clientes</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">SIGED</h1>
+                <p class="logo-subtitle">Sistema de Gestión</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="clientes.html" class="nav-item active">
+                    <i class="fas fa-users"></i>
+                    <span>Clientes</span>
+                </a>
+                <a href="reportes.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reportes</span>
+                </a>
+                <a href="ajustes.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Ajustes</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>&copy; 2025 SIGED System</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h1 class="page-title">Clientes</h1>
+                <div class="header-right">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">AD</div>
+                        <span class="user-name">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <section class="clients-section">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Gestión de Clientes</h2>
+                            <p class="section-subtitle">Administra y organiza la información de tus clientes</p>
+                        </div>
+                        <button class="btn-add-client" id="btnAddClient">
+                            <i class="fas fa-plus"></i>
+                            <span>Agregar Cliente</span>
+                        </button>
+                    </div>
+
+                    <div class="search-filter-bar">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Buscar por nombre o correo..." />
+                        </div>
+                        <div class="filters">
+                            <select class="filter-select" id="filterType">
+                                <option value="">Todos los tipos</option>
+                                <option value="independiente">Independiente</option>
+                                <option value="empleador">Empleador</option>
+                            </select>
+                            <select class="filter-select" id="filterPayment">
+                                <option value="">Todos los pagos</option>
+                                <option value="al-dia">Al Día</option>
+                                <option value="pendiente">Pendiente</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3 class="table-title">Lista de Clientes <span class="client-count">(20)</span></h3>
+                        </div>
+                        <table class="clients-management-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Tipo</th>
+                                    <th>Correo</th>
+                                    <th>Documento</th>
+                                    <th>Empleados</th>
+                                    <th>Estado de Pago</th>
+                                    <th>Fecha</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientsTableBody">
+                                <tr>
+                                    <td>María González</td>
+                                    <td><span class="badge badge-type badge-independiente"><i class="fas fa-user"></i>
+                                            Independiente</span></td>
+                                    <td>maria.gonzalez@email.com</td>
+                                    <td>CC 1234567890</td>
+                                    <td><i class="fas fa-user"></i> 2</td>
+                                    <td><span class="badge badge-success">Al Día</span></td>
+                                    <td>2025-10-25</td>
+                                    <td class="action-buttons">
+                                        <button class="btn-action btn-view" title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-action btn-delete" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Empresa ABC S.A.S</td>
+                                    <td><span class="badge badge-type badge-empleador"><i class="fas fa-building"></i>
+                                            Empleador</span></td>
+                                    <td>contacto@empresaabc.com</td>
+                                    <td>NIT 900123456-7</td>
+                                    <td><i class="fas fa-user"></i> 1</td>
+                                    <td><span class="badge badge-success">Al Día</span></td>
+                                    <td>2025-10-24</td>
+                                    <td class="action-buttons">
+                                        <button class="btn-action btn-view" title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-action btn-delete" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Juan Pérez</td>
+                                    <td><span class="badge badge-type badge-independiente"><i class="fas fa-user"></i>
+                                            Independiente</span></td>
+                                    <td>juan.perez@email.com</td>
+                                    <td>CC 9876543210</td>
+                                    <td><i class="fas fa-user"></i> 3</td>
+                                    <td><span class="badge badge-pending">Pendiente</span></td>
+                                    <td>2025-10-23</td>
+                                    <td class="action-buttons">
+                                        <button class="btn-action btn-view" title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-action btn-delete" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Carlos Rodríguez</td>
+                                    <td><span class="badge badge-type badge-independiente"><i class="fas fa-user"></i>
+                                            Independiente</span></td>
+                                    <td>carlos.rodriguez@email.com</td>
+                                    <td>CC 1122334455</td>
+                                    <td>-</td>
+                                    <td><span class="badge badge-success">Al Día</span></td>
+                                    <td>2025-10-22</td>
+                                    <td class="action-buttons">
+                                        <button class="btn-action btn-view" title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-action btn-delete" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ana Martínez</td>
+                                    <td><span class="badge badge-type badge-empleador"><i class="fas fa-building"></i>
+                                            Empleador</span></td>
+                                    <td>ana.martinez@email.com</td>
+                                    <td>NIT 800987654-3</td>
+                                    <td><i class="fas fa-user"></i> 1</td>
+                                    <td><span class="badge badge-pending">Pendiente</span></td>
+                                    <td>2025-10-21</td>
+                                    <td class="action-buttons">
+                                        <button class="btn-action btn-view" title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-action btn-delete" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Luis Fernández</td>
+                                    <td><span class="badge badge-type badge-independiente"><i class="fas fa-user"></i>
+                                            Independiente</span></td>
+                                    <td>luis.fernandez@email.com</td>
+                                    <td>Pasaporte AB123456</td>
+                                    <td><i class="fas fa-user"></i> 2</td>
+                                    <td><span class="badge badge-success">Al Día</span></td>
+                                    <td>2025-10-20</td>
+                                    <td class="action-buttons">
+                                        <button class="btn-action btn-view" title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-action btn-delete" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        document.getElementById('btnAddClient')?.addEventListener('click', function () {
+            console.log('Agregar cliente');
+        });
+
+        document.getElementById('searchInput')?.addEventListener('input', function (e) {
+            console.log('Buscando:', e.target.value);
+        });
+
+        document.getElementById('filterType')?.addEventListener('change', function (e) {
+            console.log('Filtrar por tipo:', e.target.value);
+        });
+
+        document.getElementById('filterPayment')?.addEventListener('change', function (e) {
+            console.log('Filtrar por pago:', e.target.value);
+        });
+
+        document.querySelectorAll('.btn-view').forEach(btn => {
+            btn.addEventListener('click', function () {
+                console.log('Ver detalles');
+            });
+        });
+
+        document.querySelectorAll('.btn-edit').forEach(btn => {
+            btn.addEventListener('click', function () {
+                console.log('Editar cliente');
+            });
+        });
+
+        document.querySelectorAll('.btn-delete').forEach(btn => {
+            btn.addEventListener('click', function () {
+                if (confirm('¿Está seguro de eliminar este cliente?')) {
+                    console.log('Eliminar cliente');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

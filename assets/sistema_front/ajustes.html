@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel SIGED - Ajustes</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">SIGED</h1>
+                <p class="logo-subtitle">Sistema de Gestión</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="clientes.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Clientes</span>
+                </a>
+                <a href="reportes.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reportes</span>
+                </a>
+                <a href="ajustes.html" class="nav-item active">
+                    <i class="fas fa-cog"></i>
+                    <span>Ajustes</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>&copy; 2025 SIGED System</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h1 class="page-title">Ajustes</h1>
+                <div class="header-right">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar" id="headerAvatar">AD</div>
+                        <span class="user-name" id="headerUserName">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <section class="settings-section">
+                    <h2 class="section-title">Configuración del Sistema</h2>
+                    <p class="section-subtitle">Gestiona tu perfil y las preferencias del sistema</p>
+
+                    <div class="settings-tabs">
+                        <button type="button" class="settings-tab active" data-tab="perfil">
+                            <i class="fas fa-user"></i>
+                            <span>Perfil</span>
+                        </button>
+                        <button type="button" class="settings-tab" data-tab="notificaciones">
+                            <i class="fas fa-bell"></i>
+                            <span>Notificaciones</span>
+                        </button>
+                        <button type="button" class="settings-tab" data-tab="seguridad">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Seguridad</span>
+                        </button>
+                    </div>
+
+                    <!-- Pestaña Perfil -->
+                    <div class="settings-panel active" id="panel-perfil">
+                        <div class="profile-card">
+                            <h3 class="panel-subtitle">Información del Perfil</h3>
+                            <p class="panel-desc">Actualiza tu información personal</p>
+                            <div class="profile-user-block">
+                                <div class="profile-avatar" id="profileAvatar">JD</div>
+                                <div class="profile-user-info">
+                                    <span class="profile-name" id="profileDisplayName">Juan Díaz</span>
+                                    <span class="profile-role" id="profileDisplayRole">Administrador</span>
+                                </div>
+                            </div>
+                            <form id="formPerfil" class="profile-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="nombreCompleto">Nombre Completo</label>
+                                        <input type="text" id="nombreCompleto" name="nombreCompleto" value="Juan Díaz" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="correo">Correo Electrónico</label>
+                                        <input type="email" id="correo" name="correo" value="juan.diaz@empresa.com" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="telefono">Teléfono</label>
+                                        <input type="tel" id="telefono" name="telefono" value="+34 612 345 678">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rol">Rol</label>
+                                        <input type="text" id="rol" name="rol" value="Administrador" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-save">
+                                        <i class="fas fa-save"></i>
+                                        <span>Guardar Cambios</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña Notificaciones -->
+                    <div class="settings-panel" id="panel-notificaciones">
+                        <div class="profile-card">
+                            <h3 class="panel-subtitle">Preferencias de Notificaciones</h3>
+                            <p class="panel-desc">Configura cómo y cuándo recibir alertas</p>
+                            <form id="formNotificaciones" class="notifications-form">
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="emailAlertas" id="emailAlertas" checked>
+                                        <span>Recibir alertas por correo electrónico</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="notifPagos" id="notifPagos" checked>
+                                        <span>Notificaciones de pagos pendientes</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="notifClientes" id="notifClientes" checked>
+                                        <span>Nuevos clientes registrados</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="notifDocumentos" id="notifDocumentos">
+                                        <span>Documentos aprobados o rechazados</span>
+                                    </label>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-save">
+                                        <i class="fas fa-save"></i>
+                                        <span>Guardar Preferencias</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña Seguridad -->
+                    <div class="settings-panel" id="panel-seguridad">
+                        <div class="profile-card">
+                            <h3 class="panel-subtitle">Cambiar Contraseña</h3>
+                            <p class="panel-desc">Actualiza tu contraseña de acceso</p>
+                            <form id="formSeguridad" class="security-form">
+                                <div class="form-group">
+                                    <label for="passwordActual">Contraseña actual</label>
+                                    <input type="password" id="passwordActual" name="passwordActual" placeholder="Introduce tu contraseña actual" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordNueva">Nueva contraseña</label>
+                                    <input type="password" id="passwordNueva" name="passwordNueva" placeholder="Nueva contraseña" required minlength="6">
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordConfirmar">Confirmar nueva contraseña</label>
+                                    <input type="password" id="passwordConfirmar" name="passwordConfirmar" placeholder="Repite la nueva contraseña" required minlength="6">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-save">
+                                        <i class="fas fa-key"></i>
+                                        <span>Cambiar Contraseña</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        (function() {
+            var STORAGE_PERFIL = 'siged_perfil';
+            var STORAGE_NOTIF = 'siged_notificaciones';
+
+            // Cargar datos guardados
+            function loadPerfil() {
+                try {
+                    var data = JSON.parse(localStorage.getItem(STORAGE_PERFIL));
+                    if (data) {
+                        document.getElementById('nombreCompleto').value = data.nombreCompleto || '';
+                        document.getElementById('correo').value = data.correo || '';
+                        document.getElementById('telefono').value = data.telefono || '';
+                        document.getElementById('rol').value = data.rol || 'Administrador';
+                        document.getElementById('profileDisplayName').textContent = data.nombreCompleto || 'Juan Díaz';
+                        document.getElementById('profileAvatar').textContent = getIniciales(data.nombreCompleto || 'Juan Díaz');
+                        document.getElementById('headerUserName').textContent = data.nombreCompleto ? data.nombreCompleto.split(' ')[0] : 'Admin';
+                        document.getElementById('headerAvatar').textContent = getIniciales(data.nombreCompleto || 'AD');
+                    }
+                } catch (e) {}
+            }
+
+            function getIniciales(nombre) {
+                return nombre.split(' ').map(function(s) { return s.charAt(0); }).join('').toUpperCase().slice(0, 2);
+            }
+
+            function loadNotificaciones() {
+                try {
+                    var data = JSON.parse(localStorage.getItem(STORAGE_NOTIF));
+                    if (data) {
+                        document.getElementById('emailAlertas').checked = data.emailAlertas !== false;
+                        document.getElementById('notifPagos').checked = data.notifPagos !== false;
+                        document.getElementById('notifClientes').checked = data.notifClientes !== false;
+                        document.getElementById('notifDocumentos').checked = data.notifDocumentos === true;
+                    }
+                } catch (e) {}
+            }
+
+            // Tabs
+            document.querySelectorAll('.settings-tab').forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    var tabId = this.getAttribute('data-tab');
+                    document.querySelectorAll('.settings-tab').forEach(function(t) { t.classList.remove('active'); });
+                    document.querySelectorAll('.settings-panel').forEach(function(p) { p.classList.remove('active'); });
+                    this.classList.add('active');
+                    var panel = document.getElementById('panel-' + tabId);
+                    if (panel) panel.classList.add('active');
+                });
+            });
+
+            // Guardar perfil
+            document.getElementById('formPerfil').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var nombre = document.getElementById('nombreCompleto').value.trim();
+                var correo = document.getElementById('correo').value.trim();
+                var telefono = document.getElementById('telefono').value.trim();
+                var rol = document.getElementById('rol').value;
+                var data = { nombreCompleto: nombre, correo: correo, telefono: telefono, rol: rol };
+                localStorage.setItem(STORAGE_PERFIL, JSON.stringify(data));
+                document.getElementById('profileDisplayName').textContent = nombre || 'Juan Díaz';
+                document.getElementById('profileAvatar').textContent = getIniciales(nombre || 'Juan Díaz');
+                document.getElementById('headerUserName').textContent = nombre ? nombre.split(' ')[0] : 'Admin';
+                document.getElementById('headerAvatar').textContent = getIniciales(nombre || 'AD');
+                showToast('Perfil guardado correctamente.');
+            });
+
+            // Guardar notificaciones
+            document.getElementById('formNotificaciones').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var data = {
+                    emailAlertas: document.getElementById('emailAlertas').checked,
+                    notifPagos: document.getElementById('notifPagos').checked,
+                    notifClientes: document.getElementById('notifClientes').checked,
+                    notifDocumentos: document.getElementById('notifDocumentos').checked
+                };
+                localStorage.setItem(STORAGE_NOTIF, JSON.stringify(data));
+                showToast('Preferencias de notificaciones guardadas.');
+            });
+
+            // Cambiar contraseña (simulado: solo validación y mensaje)
+            document.getElementById('formSeguridad').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var actual = document.getElementById('passwordActual').value;
+                var nueva = document.getElementById('passwordNueva').value;
+                var confirmar = document.getElementById('passwordConfirmar').value;
+                if (nueva !== confirmar) {
+                    showToast('La nueva contraseña y la confirmación no coinciden.', true);
+                    return;
+                }
+                if (nueva.length < 6) {
+                    showToast('La contraseña debe tener al menos 6 caracteres.', true);
+                    return;
+                }
+                // En producción aquí se enviaría al servidor
+                document.getElementById('formSeguridad').reset();
+                showToast('Contraseña actualizada correctamente.');
+            });
+
+            function showToast(message, isError) {
+                var toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.className = 'toast ' + (isError ? 'toast-error' : 'toast-success');
+                toast.classList.add('show');
+                setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+
+            loadPerfil();
+            loadNotificaciones();
+        })();
+    </script>
+
+</body>
+
+</html>
