@@ -112,10 +112,17 @@ function guardarCliente($datos, $id = null) {
 }
 
 /**
- * Elimina un cliente por ID.
+ * Elimina un cliente por ID (y sus notas, empleados y notas de empleados).
  */
 function eliminarCliente($id) {
     global $conn;
+    $conn->prepare("DELETE FROM info_adicional WHERE cliente_id = ?")->execute([$id]);
+    $ids = $conn->prepare("SELECT empleado_id FROM empleado WHERE cliente_id = ?");
+    $ids->execute([$id]);
+    foreach ($ids->fetchAll() as $r) {
+        $conn->prepare("DELETE FROM info_adicional WHERE empleado_id = ?")->execute([$r['empleado_id']]);
+    }
+    $conn->prepare("DELETE FROM empleado WHERE cliente_id = ?")->execute([$id]);
     $stmt = $conn->prepare("DELETE FROM cliente WHERE cliente_id = ?");
     return $stmt->execute([$id]);
 }
