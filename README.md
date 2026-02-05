@@ -5,6 +5,7 @@ El proyecto SIGED es un Sistema de Gestion Documental diseñado para centralizar
 Su objetivo es facilitar el registro, consulta, actualización y control de datos mediante una plataforma clara y accesible, optimizando procesos, reduciendo errores y mejorando la productividad del usuario.
 
 ===============================
+
 Sistema de gestión documental integrado con base de datos MySQL/MariaDB.
 
 ## Requisitos
