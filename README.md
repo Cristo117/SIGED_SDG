@@ -1,10 +1,10 @@
 # SIGED - Sistema de Gestión Documental
 
-<<<<<<< HEAD
+# HEAD
 El proyecto SIGED es un Sistema de Gestion Documental diseñado para centralizar y administrar información de forma eficiente.
 Su objetivo es facilitar el registro, consulta, actualización y control de datos mediante una plataforma clara y accesible, optimizando procesos, reduciendo errores y mejorando la productividad del usuario.
 
-=======
+=======================================================================
 Sistema de gestión documental integrado con base de datos MySQL/MariaDB.
 
 ## Requisitos
@@ -52,4 +52,4 @@ Sistema de gestión documental integrado con base de datos MySQL/MariaDB.
 ## Nota
 
 La carpeta `assets/sistema_front/` contenía los archivos HTML provisionales. Ya están integrados en los archivos PHP correspondientes y pueden eliminarse cuando se confirme que todo funciona correctamente.
->>>>>>> 8b1b4cd (Cambios locales antes de sincronizar con GitHub)
+8b1b4cd (Cambios locales antes de sincronizar con GitHub)
