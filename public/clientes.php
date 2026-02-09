@@ -42,8 +42,8 @@ require_once __DIR__ . '/../includes/header.php';
     <form method="GET" class="search-filter-bar">
         <div class="search-box">
             <i class="fas fa-search"></i>
-            <input type="text" name="busqueda" id="searchInput" placeholder="Buscar por nombre o correo..." 
-                   value="<?= htmlspecialchars($busqueda ?? '') ?>" />
+            <input type="text" name="busqueda" id="searchInput" placeholder="Buscar por nombre o correo..."
+                value="<?= htmlspecialchars($busqueda ?? '') ?>" />
         </div>
         <div class="filters">
             <select class="filter-select" name="tipo" id="filterType">
@@ -79,58 +79,58 @@ require_once __DIR__ . '/../includes/header.php';
             </thead>
             <tbody id="clientsTableBody">
                 <?php if (empty($clientes)): ?>
-                <tr>
-                    <td colspan="8" style="text-align: center; padding: 2rem;">No hay clientes que coincidan con los filtros</td>
-                </tr>
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 2rem;">No hay clientes que coincidan con los filtros</td>
+                    </tr>
                 <?php else: ?>
-                <?php foreach ($clientes as $c): 
-                    $doc = trim(($c['tipo_identificacion'] ?? '') . ' ' . ($c['identificacion'] ?? ''));
-                    $tipoClase = strtolower($c['tipo_cliente']) === 'empleador' ? 'empleador' : 'independiente';
-                ?>
-                <tr>
-                    <td><?= htmlspecialchars($c['nombre']) ?></td>
-                    <td>
-                        <span class="badge badge-type badge-<?= $tipoClase ?>">
-                            <i class="fas fa-<?= $tipoClase === 'empleador' ? 'building' : 'user' ?>"></i>
-                            <?= htmlspecialchars($c['tipo_cliente']) ?>
-                        </span>
-                    </td>
-                    <td><?= htmlspecialchars($c['email'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($doc ?: '-') ?></td>
-                    <td>
-                        <?php if (!empty($c['num_empleados']) && $c['num_empleados'] > 0): ?>
-                        <i class="fas fa-user"></i> <?= (int)$c['num_empleados'] ?>
-                        <?php else: ?>
-                        -
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <span class="badge badge-<?= $c['estado_pago'] === 'AL_DIA' ? 'success' : 'pending' ?>">
-                            <?= $c['estado_pago'] === 'AL_DIA' ? 'Al Día' : 'Pendiente' ?>
-                        </span>
-                    </td>
-                    <td><?= date('Y-m-d', strtotime($c['creado_at'])) ?></td>
-                    <td class="action-buttons">
-                        <a href="cliente_detalle.php?id=<?= $c['cliente_id'] ?>" class="btn-action btn-view" title="Ver detalles">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a href="cliente_editar.php?id=<?= $c['cliente_id'] ?>" class="btn-action btn-edit" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <button type="button" class="btn-action btn-delete" title="Eliminar" 
-                                data-id="<?= $c['cliente_id'] ?>" data-nombre="<?= htmlspecialchars($c['nombre']) ?>">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
+                    <?php foreach ($clientes as $c):
+                        $doc = trim(($c['tipo_identificacion'] ?? '') . ' ' . ($c['identificacion'] ?? ''));
+                        $tipoClase = strtolower($c['tipo_cliente']) === 'empleador' ? 'empleador' : 'independiente';
+                    ?>
+                        <tr>
+                            <td><?= htmlspecialchars($c['nombre']) ?></td>
+                            <td>
+                                <span class="badge badge-type badge-<?= $tipoClase ?>">
+                                    <i class="fas fa-<?= $tipoClase === 'empleador' ? 'building' : 'user' ?>"></i>
+                                    <?= htmlspecialchars($c['tipo_cliente']) ?>
+                                </span>
+                            </td>
+                            <td><?= htmlspecialchars($c['email'] ?? '-') ?></td>
+                            <td><?= htmlspecialchars($doc ?: '-') ?></td>
+                            <td>
+                                <?php if (!empty($c['num_empleados']) && $c['num_empleados'] > 0): ?>
+                                    <i class="fas fa-user"></i> <?= (int)$c['num_empleados'] ?>
+                                <?php else: ?>
+                                    -
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <span class="badge badge-<?= $c['estado_pago'] === 'AL_DIA' ? 'success' : 'pending' ?>">
+                                    <?= $c['estado_pago'] === 'AL_DIA' ? 'Al Día' : 'Pendiente' ?>
+                                </span>
+                            </td>
+                            <td><?= date('Y-m-d', strtotime($c['creado_at'])) ?></td>
+                            <td class="action-buttons">
+                                <a href="cliente_detalle.php?id=<?= $c['cliente_id'] ?>" class="btn-action btn-view" title="Ver detalles">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="cliente_editar.php?id=<?= $c['cliente_id'] ?>" class="btn-action btn-edit" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button type="button" class="btn-action btn-delete" title="Eliminar"
+                                    data-id="<?= $c['cliente_id'] ?>" data-nombre="<?= htmlspecialchars($c['nombre']) ?>">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 <?php endif; ?>
             </tbody>
         </table>
     </div>
 </section>
 
-<?php 
+<?php
 $extraScripts = <<<'SCRIPT'
 <script>
 document.getElementById('btnAddClient')?.addEventListener('click', function () {
@@ -148,5 +148,5 @@ document.querySelectorAll('.btn-delete').forEach(btn => {
 });
 </script>
 SCRIPT;
-require_once __DIR__ . '/../includes/footer.php'; 
+require_once __DIR__ . '/../includes/footer.php';
 ?>
