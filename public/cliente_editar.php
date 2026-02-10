@@ -232,7 +232,8 @@ require_once __DIR__ . '/../includes/header.php';
             <div class="form-group">
                 <label for="identificacion">Número Documento</label>
                 <input type="text" id="identificacion" name="identificacion"
-                    value="<?= htmlspecialchars($cliente['identificacion'] ?? $_POST['identificacion'] ?? '') ?>">
+                    inputmode="numeric" pattern="[0-9]*"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'')" value="<?= htmlspecialchars($cliente['identificacion'] ?? $_POST['identificacion'] ?? '') ?>">
             </div>
         </div>
         <div class="form-row">
@@ -312,7 +313,10 @@ require_once __DIR__ . '/../includes/header.php';
                                 </div>
                                 <div class="form-group">
                                     <label>Número Documento</label>
-                                    <input type="text" name="empleado_numero_documento[]" placeholder="Número">
+                                    <input type="text" name="empleado_numero_documento[]" placeholder="Número"
+                                        inputmode="numeric" pattern="[0-9]*"
+                                        oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
                                 </div>
                             </div>
                             <div class="form-row">
@@ -411,7 +415,7 @@ require_once __DIR__ . '/../includes/header.php';
 </section>
 
 <?php
-$empleadoTemplate = htmlspecialchars(
+$empleadoTemplate =
     <<<'HTML'
 <div class="empleado-item" data-index="__INDEX__">
     <div class="empleado-item-header">
@@ -443,7 +447,10 @@ $empleadoTemplate = htmlspecialchars(
             </div>
             <div class="form-group">
                 <label>Número Documento</label>
-                <input type="text" name="empleado_numero_documento[]" placeholder="Número">
+                <input type="text" name="empleado_numero_documento[]" placeholder="Número"
+                inputmode="numeric" pattern="[0-9]*"
+                oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
             </div>
         </div>
         <div class="form-row">
@@ -465,8 +472,7 @@ $empleadoTemplate = htmlspecialchars(
         </div>
     </div>
 </div>
-HTML
-);
+HTML;
 
 $extraScripts = <<<SCRIPT
 <script>
