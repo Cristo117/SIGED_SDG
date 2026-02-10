@@ -41,9 +41,14 @@ require_once __DIR__ . '/../includes/header.php';
             <h2 class="section-title"><?= htmlspecialchars($cliente['nombre']) ?></h2>
             <p class="section-subtitle">Información del cliente</p>
         </div>
-        <a href="cliente_editar.php?id=<?= $id ?>" class="btn-add-client">
-            <i class="fas fa-edit"></i> Editar
-        </a>
+        <div style="display: flex; gap: 10px;">
+            <a href="reportes.php?ver_procesos=<?= $id ?>" class="btn-add-client" style="background: #2e7d32;">
+                <i class="fas fa-list"></i> Procesos y Estado
+            </a>
+            <a href="cliente_editar.php?id=<?= $id ?>" class="btn-add-client">
+                <i class="fas fa-edit"></i> Editar
+            </a>
+        </div>
     </div>
 
     <div class="profile-card">

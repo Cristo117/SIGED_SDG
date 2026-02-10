@@ -114,6 +114,9 @@ require_once __DIR__ . '/../includes/header.php';
                                 <a href="cliente_detalle.php?id=<?= $c['cliente_id'] ?>" class="btn-action btn-view" title="Ver detalles">
                                     <i class="fas fa-eye"></i>
                                 </a>
+                                <a href="reportes.php?ver_procesos=<?= $c['cliente_id'] ?>" class="btn-action btn-procesos" title="Procesos y estado">
+                                    <i class="fas fa-list"></i>
+                                </a>
                                 <a href="cliente_editar.php?id=<?= $c['cliente_id'] ?>" class="btn-action btn-edit" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>

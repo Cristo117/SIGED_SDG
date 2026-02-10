@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'tipo_identificacion' => trim($_POST['tipo_identificacion'] ?? '') ?: null,
         'identificacion' => trim($_POST['identificacion'] ?? '') ?: null,
         'tipo_cliente' => $_POST['tipo_cliente'] ?? 'INDEPENDIENTE',
-        'estado_pago' => $_POST['estado_pago'] ?? 'AL_DIA'
+        'estado_pago' => $cliente['estado_pago'] ?? 'AL_DIA'
     ];
 
     // Validar que el nombre no esté vacío
@@ -246,11 +246,9 @@ require_once __DIR__ . '/../includes/header.php';
                 <small class="form-hint" id="hintTipo">Los independientes no tienen empleados.</small>
             </div>
             <div class="form-group">
-                <label for="estado_pago">Estado de Pago</label>
-                <select id="estado_pago" name="estado_pago">
-                    <option value="AL_DIA" <?= ($cliente['estado_pago'] ?? $_POST['estado_pago'] ?? '') === 'AL_DIA' ? 'selected' : '' ?>>Al Día</option>
-                    <option value="PENDIENTE" <?= ($cliente['estado_pago'] ?? $_POST['estado_pago'] ?? '') === 'PENDIENTE' ? 'selected' : '' ?>>Pendiente</option>
-                </select>
+                <label>Estado de Pago</label>
+                <p class="form-readonly"><span class="badge badge-<?= ($cliente['estado_pago'] ?? 'AL_DIA') === 'AL_DIA' ? 'success' : 'pending' ?>"><?= ($cliente['estado_pago'] ?? 'AL_DIA') === 'AL_DIA' ? 'Al Día' : 'Pendiente' ?></span></p>
+                <small class="form-hint">Solo se puede cambiar al asignar un proceso en Reportes.</small>
             </div>
         </div>
 
@@ -415,7 +413,7 @@ require_once __DIR__ . '/../includes/header.php';
 </section>
 
 <?php
-$empleadoTemplate =
+$empleadoTemplate = 
     <<<'HTML'
 <div class="empleado-item" data-index="__INDEX__">
     <div class="empleado-item-header">
