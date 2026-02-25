@@ -15,6 +15,7 @@ function actualizarPerfilCtrl($conn, $usuarioId, $nombre, $email) {
 function cambiarPasswordCtrl($conn, $usuarioId, $passwordActual, $passwordNueva) {
 
     $hashActual = obtenerHashPassword($conn, $usuarioId);
+    
 
     if (!$hashActual) {
         return false;

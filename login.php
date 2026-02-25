@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $usuario['username'];
             $_SESSION['nombre'] = $usuario['nombre'];
             $_SESSION['email'] = $usuario['email'];
+            $_SESSION['Olvido_contrasena'] = $usuario['olvido_contrasena'];
             header('Location: index.php');
             exit;
         } else {
@@ -76,12 +77,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label for="username">Usuario</label>
                     <input type="text" id="username" name="username" required autofocus
-                           value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
+                        value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
                 </div>
                 
                 <div class="form-group">
                     <label for="password">Contraseña</label>
                     <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <a href="recuperar_contrasena.php" class="forgot-password-link">¿Olvido su contraseña?</a>
                 </div>
                 
                 <button type="submit" class="btn-login">

@@ -1,9 +1,13 @@
 <?php
 
+// $host = "localhost";
+// $db   = "u510269792_siged_sdg";
+// $user = "u510269792_siged_sdg";
+// $pass = "Criss117";
 $host = "localhost";
-$db   = "u510269792_siged_sdg";
-$user = "u510269792_siged_sdg";
-$pass = "Criss117";
+$db   = "siged_sdg";
+$user = "root";
+$pass = "";
 
 try {
     $conn = new PDO(
