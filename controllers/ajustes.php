@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/UsuarioModel.php';
+require_once __DIR__ . '/../models/usuario_model.php';
 
 function actualizarPerfilCtrl($conn, $usuarioId, $nombre, $email) {
 

@@ -1,0 +1,5 @@
+# Bloquear acceso directo a archivos subidos.
+# La descarga debe hacerse mediante public/descargar_documento.php (con autenticación).
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>

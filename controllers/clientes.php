@@ -3,13 +3,15 @@ require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../models/cliente_model.php';
 
 // Almacenar referencias a las funciones del modelo
-$model_obtenerClientes = 'obtenerClientes';
-$model_obtenerClientePorId = 'obtenerClientePorId';
-$model_guardarCliente = 'guardarCliente';
-$model_eliminarCliente = 'eliminarCliente';
-$model_obtenerUltimosClientes = 'obtenerUltimosClientes';
-$model_contarClientes = 'contarClientes';
-$model_contarClientesPendientes = 'contarClientesPendientes';
+$model_obtenerClientes = 'cliente_model_obtenerClientes';
+$model_obtenerClientePorId = 'cliente_model_obtenerClientePorId';
+$model_guardarCliente = 'cliente_model_guardarCliente';
+$model_eliminarCliente = 'cliente_model_eliminarCliente';
+$model_obtenerClientesInactivos = 'cliente_model_obtenerClientesInactivos';
+$model_reactivarCliente = 'cliente_model_reactivarCliente';
+$model_obtenerUltimosClientes = 'cliente_model_obtenerUltimosClientes';
+$model_contarClientes = 'cliente_model_contarClientes';
+$model_contarClientesPendientes = 'cliente_model_contarClientesPendientes';
 
 function listarClientes($conn, $tipo = null, $pago = null, $busqueda = null) {
     global $model_obtenerClientes;
@@ -39,6 +41,16 @@ function guardarCliente($datos, $id = null) {
 function eliminarCliente($id) {
     global $conn, $model_eliminarCliente;
     return call_user_func($model_eliminarCliente, $conn, $id);
+}
+
+function obtenerClientesInactivos() {
+    global $conn, $model_obtenerClientesInactivos;
+    return call_user_func($model_obtenerClientesInactivos, $conn);
+}
+
+function reactivarCliente($id) {
+    global $conn, $model_reactivarCliente;
+    return call_user_func($model_reactivarCliente, $conn, $id);
 }
 
 function guardarClienteCtrl($conn, $datos, $id = null) {

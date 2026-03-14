@@ -5,24 +5,28 @@ require_once __DIR__ . '/../models/proceso_model.php';
 require_once __DIR__ . '/../models/configuracion_model.php';
 
 // Almacenar referencias a las funciones del modelo
-$model_asegurarColumnaEstadoPagoProceso = 'asegurarColumnaEstadoPagoProceso';
-$model_obtenerValorAfiliacion = 'obtenerValorAfiliacion';
-$model_obtenerEstadisticasReportes = 'obtenerEstadisticasReportes';
-$model_obtenerTopClientes = 'obtenerTopClientes';
-$model_obtenerIngresosPorTipo = 'obtenerIngresosPorTipo';
-$model_obtenerProcesosActivos = 'obtenerProcesosActivos';
-$model_obtenerConfiguracionValores = 'obtenerConfiguracionValores';
-$model_guardarValorAfiliacion = 'guardarValorAfiliacion';
-$model_asegurarConfiguracionInicial = 'asegurarConfiguracionInicial';
-$model_agregarProceso = 'agregarProceso';
-$model_actualizarProceso = 'actualizarProceso';
-$model_eliminarProceso = 'eliminarProceso';
-$model_obtenerClientesParaAsignar = 'obtenerClientesParaAsignar';
-$model_asignarProcesoACliente = 'asignarProcesoACliente';
-$model_obtenerProcesosPorCliente = 'obtenerProcesosPorCliente';
-$model_obtenerNombreCliente = 'obtenerNombreCliente';
-$model_obtenerEstadoPagoCliente = 'obtenerEstadoPagoCliente';
-$model_toggleEstadoPagoProcesoCliente = 'toggleEstadoPagoProcesoCliente';
+$model_asegurarColumnaEstadoPagoProceso = 'proceso_model_asegurarColumnaEstadoPagoProceso';
+$model_obtenerValorAfiliacion = 'configuracion_model_obtenerValorAfiliacion';
+$model_obtenerEstadisticasReportes = 'proceso_model_obtenerEstadisticasReportes';
+$model_obtenerTopClientes = 'proceso_model_obtenerTopClientes';
+$model_obtenerIngresosPorTipo = 'proceso_model_obtenerIngresosPorTipo';
+$model_obtenerProcesosActivos = 'proceso_model_obtenerProcesosActivos';
+$model_obtenerConfiguracionValores = 'proceso_model_obtenerConfiguracionValores';
+$model_guardarValorAfiliacion = 'configuracion_model_guardarValorAfiliacion';
+$model_asegurarConfiguracionInicial = 'configuracion_model_asegurarConfiguracionInicial';
+$model_agregarProceso = 'proceso_model_agregarProceso';
+$model_actualizarProceso = 'proceso_model_actualizarProceso';
+$model_eliminarProceso = 'proceso_model_eliminarProceso';
+$model_obtenerClientesParaAsignar = 'proceso_model_obtenerClientesParaAsignar';
+$model_asignarProcesoACliente = 'proceso_model_asignarProcesoACliente';
+$model_obtenerProcesosPorCliente = 'proceso_model_obtenerProcesosPorCliente';
+$model_obtenerNombreCliente = 'proceso_model_obtenerNombreCliente';
+$model_obtenerEstadoPagoCliente = 'proceso_model_obtenerEstadoPagoCliente';
+$model_toggleEstadoPagoProcesoCliente = 'proceso_model_toggleEstadoPagoProcesoCliente';
+$model_contarProcesosActivos = 'proceso_model_contarProcesosActivos';
+$model_obtenerHistorialPagos = 'proceso_model_obtenerHistorialPagos';
+$model_contarHistorialPagos = 'proceso_model_contarHistorialPagos';
+$model_eliminarProcesosCliente = 'proceso_model_eliminarProcesosCliente';
 
 /**
  * Asegura que proceso_cliente tenga la columna estado_pago.
@@ -132,9 +136,9 @@ function obtenerClientesParaAsignar() {
 /**
  * Asigna un proceso a un cliente.
  */
-function asignarProcesoACliente($clienteId, $procesoId) {
+function asignarProcesoACliente($clienteId, $procesoId, $empleadoId = null) {
     global $conn, $model_asignarProcesoACliente;
-    return call_user_func($model_asignarProcesoACliente, $conn, $clienteId, $procesoId);
+    return call_user_func($model_asignarProcesoACliente, $conn, $clienteId, $procesoId, $empleadoId);
 }
 
 /**
@@ -171,9 +175,35 @@ function toggleEstadoPagoProcesoCliente($procesoClienteId) {
 }
 
 function contarProcesosActivos() {
+    global $conn, $model_contarProcesosActivos;
+    return call_user_func($model_contarProcesosActivos, $conn);
+}
+
+function generarCobrosMensualesSeguridadSocial() {
     global $conn;
-    if (!function_exists('contarProcesosActivos')) {
-        require_once __DIR__ . '/../models/proceso_model.php';
-    }
-    return contarProcesosActivos($conn);
+    return proceso_model_generarCobrosMensualesSeguridadSocial($conn);
+}
+
+/**
+ * Obtiene el historial de pagos (clientes al día).
+ */
+function obtenerHistorialPagos($limite = 500, $offset = 0) {
+    global $conn, $model_obtenerHistorialPagos;
+    return call_user_func($model_obtenerHistorialPagos, $conn, $limite, $offset);
+}
+
+/**
+ * Cuenta los registros del historial de pagos.
+ */
+function contarHistorialPagos() {
+    global $conn, $model_contarHistorialPagos;
+    return call_user_func($model_contarHistorialPagos, $conn);
+}
+
+/**
+ * Elimina todos los procesos de un cliente y reinicia su contabilidad.
+ */
+function eliminarProcesosCliente($clienteId) {
+    global $conn, $model_eliminarProcesosCliente;
+    return call_user_func($model_eliminarProcesosCliente, $conn, $clienteId);
 }

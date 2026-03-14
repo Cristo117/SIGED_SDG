@@ -3,7 +3,7 @@
 /**
  * Obtiene las notas (título, valor) de un cliente.
  */
-function obtenerNotasCliente($conn, $clienteId) {
+function info_adicional_model_obtenerNotasCliente($conn, $clienteId) {
     $stmt = $conn->prepare("SELECT info_id, etiqueta as titulo, valor FROM info_adicional WHERE cliente_id = ? AND empleado_id IS NULL ORDER BY info_id");
     $stmt->execute([$clienteId]);
     return $stmt->fetchAll();
@@ -12,7 +12,7 @@ function obtenerNotasCliente($conn, $clienteId) {
 /**
  * Obtiene las notas de un empleado.
  */
-function obtenerNotasEmpleado($conn, $empleadoId) {
+function info_adicional_model_obtenerNotasEmpleado($conn, $empleadoId) {
     $stmt = $conn->prepare("SELECT info_id, etiqueta as titulo, valor FROM info_adicional WHERE empleado_id = ? ORDER BY info_id");
     $stmt->execute([$empleadoId]);
     return $stmt->fetchAll();
@@ -21,7 +21,7 @@ function obtenerNotasEmpleado($conn, $empleadoId) {
 /**
  * Guarda las notas de un cliente. Reemplaza todas las existentes.
  */
-function guardarNotasCliente($conn, $clienteId, $pares) {
+function info_adicional_model_guardarNotasCliente($conn, $clienteId, $pares) {
     $stmt = $conn->prepare("DELETE FROM info_adicional WHERE cliente_id = ? AND empleado_id IS NULL");
     $stmt->execute([$clienteId]);
     foreach ($pares as $p) {
@@ -37,7 +37,7 @@ function guardarNotasCliente($conn, $clienteId, $pares) {
 /**
  * Guarda las notas de un empleado. Reemplaza todas las existentes.
  */
-function guardarNotasEmpleado($conn, $empleadoId, $pares) {
+function info_adicional_model_guardarNotasEmpleado($conn, $empleadoId, $pares) {
     $stmt = $conn->prepare("DELETE FROM info_adicional WHERE empleado_id = ?");
     $stmt->execute([$empleadoId]);
     foreach ($pares as $p) {

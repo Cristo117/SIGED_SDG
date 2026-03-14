@@ -5,9 +5,16 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../controllers/clientes.php';
+require_once __DIR__ . '/../models/historial_model.php';
 
 requireAuth();
+
+if (!puedeEliminar()) {
+    header('Location: clientes.php');
+    exit;
+}
 
 $id = (int) ($_GET['id'] ?? 0);
 
@@ -21,6 +28,9 @@ if ($id <= 0) {
     exit;
 }
 
+$clienteAntes = obtenerClientePorId($id);
+$nombreCliente = $clienteAntes ? (($clienteAntes['nombre'] ?? '') . ' ' . ($clienteAntes['apellidos'] ?? '')) : '';
+
 $eliminado = false;
 try {
     $eliminado = eliminarCliente($id);
@@ -29,10 +39,14 @@ try {
     $eliminado = false;
 }
 
+if ($eliminado && $nombreCliente) {
+    registrarActividad($conn, 'ELIMINAR_CLIENTE', 'Movió a inactivos al cliente "' . trim($nombreCliente) . '"');
+}
+
 // Guardamos el mensaje en la sesión
 $_SESSION['cliente_msg'] = $eliminado 
-    ? 'Cliente eliminado correctamente' 
-    : 'No se pudo eliminar. Verifique si el cliente tiene procesos o empleados asociados.';
+    ? 'Cliente movido a inactivos correctamente' 
+    : 'No se pudo inactivar. Ejecute config/migration_cliente_activo.sql si es la primera vez.';
 $_SESSION['cliente_msg_type'] = $eliminado ? 'success' : 'error';
 
 // Redirección final usando la ruta calculada

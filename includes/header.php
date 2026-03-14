@@ -1,5 +1,5 @@
 <?php
-// 1. Configuración de Títulos y Usuario
+require_once __DIR__ . '/csrf.php';
 $pageTitle = $pageTitle ?? 'SIGED';
 $activePage = $activePage ?? 'inicio';
 $usuario = getUsuarioActual();
@@ -28,30 +28,23 @@ $iniciales = count($partes) >= 2
     <link rel="icon" type="image/svg+xml" href="<?= $ruta_to_raiz ?>siged.svg">
     <link rel="stylesheet" href="<?= $ruta_to_raiz ?>assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* Estilos para el Logo SVG */
-        .sidebar-header {
-            display: flex;
-            justify-content: center;
-            padding: 20px 0;
+    <meta name="csrf-token" content="<?= htmlspecialchars(csrf_token()) ?>">
+    <script>
+    window.SIGED_CSRF = <?= json_encode(csrf_token()) ?>;
+    (function(){
+      var orig = window.fetch;
+      window.fetch = function(url, opts) {
+        opts = opts || {};
+        opts.headers = opts.headers || {};
+        if (opts.headers.append) {
+          opts.headers.append('X-CSRF-Token', window.SIGED_CSRF || '');
+        } else {
+          opts.headers['X-CSRF-Token'] = window.SIGED_CSRF || '';
         }
-
-        .logo-svg {
-            /* Aquí pones el color que quieras (Hexadecimal o RGB) */
-            color: ##FFFFFF; 
-            transition: color 0.3s ease;
-            width: 120px;
-            height: auto;
-        }
-
-        .logo-svg:hover {
-            color: #3498db; /* Color al pasar el mouse */
-        }
-
-        /* Asegúrate de que el path del SVG use fill="currentColor" */
-    </style>
-
+        return orig.call(this, url, opts);
+      };
+    })();
+    </script>
     <?php if (!empty($loadChartJs)): ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <?php endif; ?>
@@ -63,11 +56,9 @@ $iniciales = count($partes) >= 2
 <body>
     <div class="layout">
         <aside class="sidebar">
-            <div class="sidebar-header">
-    <a href="<?= $ruta_to_raiz ?>index.php" class="logo-link" style="display: flex; justify-content: center; padding: 20px 0;">
-        <img src="<?= $ruta_to_raiz ?>siged.svg" 
-             alt="Logo SIGED" 
-             style="width: 150px; height: auto; filter: brightness(0) invert(1);">
+            <div class="sidebar-header logo-link-wrap">
+    <a href="<?= $ruta_to_raiz ?>index.php" class="logo-link">
+        <img src="<?= $ruta_to_raiz ?>siged.svg" alt="Logo SIGED" class="logo-img">
     </a>
 </div>
             
@@ -81,12 +72,22 @@ $iniciales = count($partes) >= 2
                     <i class="fas fa-users"></i>
                     <span>Clientes</span>
                 </a>
+
+                <a href="<?= $ruta_to_public ?>clientes_inactivos.php" class="nav-item <?= $activePage === 'clientes_inactivos' ? 'active' : '' ?>">
+                    <i class="fas fa-user-slash"></i>
+                    <span>Inactivos</span>
+                </a>
                 
                 <a href="<?= $ruta_to_public ?>reportes.php" class="nav-item <?= $activePage === 'reportes' ? 'active' : '' ?>">
                     <i class="fas fa-chart-bar"></i>
                     <span>Reportes</span>
                 </a>
-                
+                <?php if (esAdministrador()): ?>
+                <a href="<?= $ruta_to_public ?>historial.php" class="nav-item <?= $activePage === 'historial' ? 'active' : '' ?>">
+                    <i class="fas fa-history"></i>
+                    <span>Historial</span>
+                </a>
+                <?php endif; ?>
                 <a href="<?= $ruta_to_public ?>ajustes.php" class="nav-item <?= $activePage === 'ajustes' ? 'active' : '' ?>">
                     <i class="fas fa-cog"></i>
                     <span>Ajustes</span>
@@ -105,13 +106,6 @@ $iniciales = count($partes) >= 2
                 </div>
                 
                 <div class="header-right">
-                    <div class="notification-icon">
-                        <i class="fas fa-bell"></i>
-                        <?php if (!empty($notificacionesCount) && $notificacionesCount > 0): ?>
-                        <span class="notification-badge"><?= (int)$notificacionesCount ?></span>
-                        <?php endif; ?>
-                    </div>
-
                     <div class="user-profile">
                         <div class="user-avatar"><?= htmlspecialchars($iniciales) ?></div>
                         <span class="user-name"><?= htmlspecialchars($nombre_usuario) ?></span>

@@ -4,9 +4,10 @@ require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../models/empleado_model.php';
 
 // Almacenar referencias a las funciones del modelo antes de definir las del controlador
-$model_obtenerEmpleadosPorCliente = 'obtenerEmpleadosPorCliente';
-$model_guardarEmpleado = 'guardarEmpleado';
-$model_eliminarEmpleado = 'eliminarEmpleado';
+$model_obtenerEmpleadosPorCliente = 'empleado_model_obtenerEmpleadosPorCliente';
+$model_guardarEmpleado = 'empleado_model_guardarEmpleado';
+$model_eliminarEmpleado = 'empleado_model_eliminarEmpleado';
+$model_reasignarEmpleado = 'empleado_model_reasignarEmpleado';
 
 /**
  * Obtiene los empleados de un cliente.
@@ -30,4 +31,9 @@ function guardarEmpleado($datos, $empleadoId = null) {
 function eliminarEmpleado($empleadoId, $clienteId) {
     global $conn, $model_eliminarEmpleado;
     return call_user_func($model_eliminarEmpleado, $conn, $empleadoId, $clienteId);
+}
+
+function reasignarEmpleado($empleadoId, $nuevoClienteId) {
+    global $conn, $model_reasignarEmpleado;
+    return call_user_func($model_reasignarEmpleado, $conn, $empleadoId, $nuevoClienteId);
 }

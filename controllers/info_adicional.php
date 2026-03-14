@@ -4,10 +4,10 @@ require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../models/info_adicional_model.php';
 
 // Almacenar referencias a las funciones del modelo
-$model_obtenerNotasCliente = 'obtenerNotasCliente';
-$model_obtenerNotasEmpleado = 'obtenerNotasEmpleado';
-$model_guardarNotasCliente = 'guardarNotasCliente';
-$model_guardarNotasEmpleado = 'guardarNotasEmpleado';
+$model_obtenerNotasCliente = 'info_adicional_model_obtenerNotasCliente';
+$model_obtenerNotasEmpleado = 'info_adicional_model_obtenerNotasEmpleado';
+$model_guardarNotasCliente = 'info_adicional_model_guardarNotasCliente';
+$model_guardarNotasEmpleado = 'info_adicional_model_guardarNotasEmpleado';
 
 /**
  * Obtiene las notas (título, valor) de un cliente.
